@@ -6,9 +6,9 @@ const fs = require('fs');
 const https = require('https');
 const server = https.createServer(
   {
-    key: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/chain.pem'),
+    key: fs.readFileSync('/home/ubuntu/sslKey/privkey.pem'),
+    cert: fs.readFileSync('/home/ubuntu/sslKey/cert.pem'),
+    ca: fs.readFileSync('/home/ubuntu/sslKey/chain.pem'),
     requestCert: false,
     rejectUnauthorized: false,
   },
