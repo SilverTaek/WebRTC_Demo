@@ -1,8 +1,22 @@
 const express = require('express')
 const app = express()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
+
+const fs = require('fs');
+const https = require('https');
+const server = https.createServer(
+  {
+    key: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/j4a301.p.ssafy.io/chain.pem'),
+    requestCert: false,
+    rejectUnauthorized: false,
+  },
+  app
+);
+
+const io = require('socket.io')(server)
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
