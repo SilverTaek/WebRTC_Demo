@@ -1,22 +1,8 @@
 const express = require('express')
 const app = express()
-const { v4: uuidV4 } = require('uuid')
-
-const fs = require('fs');
-const https = require('https');
-const server = https.createServer(
-  {
-    key: fs.readFileSync('/home/ubuntu/sslKey/privkey.pem'),
-    cert: fs.readFileSync('/home/ubuntu/sslKey/cert.pem'),
-    ca: fs.readFileSync('/home/ubuntu/sslKey/chain.pem'),
-    requestCert: false,
-    rejectUnauthorized: false,
-  },
-  app
-);
-
+const server = require('http').Server(app)
 const io = require('socket.io')(server)
-
+const { v4: uuidV4 } = require('uuid')
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
